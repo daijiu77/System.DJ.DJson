@@ -179,7 +179,7 @@ namespace System.DJ.DJson
             bool isArr = false;
             Type vType = null;
             foreach (DJsonItem item in DJson.From(json))
-            {                
+            {
                 if (0 == n)
                 {
                     if (item.isArrayItemOfValue)
@@ -398,12 +398,17 @@ namespace System.DJ.DJson
                 value = type.GetProperty("value").GetValue(kvObj, null);
                 string isArr = type.GetProperty("is_arr").GetValue(kvObj, null).ToString();
                 is_arr = Convert.ToBoolean(isArr);
+
+                string isJson= type.GetProperty("is_json").GetValue(kvObj, null).ToString();
+                is_json = Convert.ToBoolean(isJson);
             }
 
             public string key { get; set; }
             public object value { get; set; }
 
             public bool is_arr { get; set; }
+
+            public bool is_json { get; set; }
         }
 
         class ValueIndexObj
@@ -461,11 +466,10 @@ namespace System.DJ.DJson
                     }
                     else
                     {
-                        Dictionary<string, CKeyValue> dictionary = new Dictionary<string, CKeyValue>();
-                        v = replaceAll(v, dictionary);
                         current.isJsonOfValue = JsonRegex.rgJsonUnit.IsMatch(v);
                         current.isJsonOfValue = false == current.isJsonOfValue ? JsonRegex.rgBaseTypeArr.IsMatch(v) : current.isJsonOfValue;
                         current.isJsonOfValue = false == current.isJsonOfValue ? JsonRegex.rgMixedArr.IsMatch(v) : current.isJsonOfValue;
+                        current.isJsonOfValue = false == current.isJsonOfValue ? kv.is_json : current.isJsonOfValue;
                     }
                     object v1 = convertValue(current);
                     if (null != v1)
@@ -533,7 +537,7 @@ namespace System.DJ.DJson
                 resetStrJsonVal(ref Value);
                 vObj = convertTo(Value1, Value);
 
-                vObj = new { key = Value + "_" + n, value = vObj, is_arr = true };
+                vObj = new { key = Value + "_" + n, value = vObj, is_arr = true, is_json = false };
                 results.Add(vObj);
 
                 n++;
@@ -560,7 +564,7 @@ namespace System.DJ.DJson
                 sjson = sjson.Replace(JsonUnit, "");
                 restReplace(dictionary, ref JsonUnit);
                 resetStrJsonVal(ref JsonUnit);
-                results.Add(new { key = "", value = JsonUnit, is_arr = true });
+                results.Add(new { key = "", value = JsonUnit, is_arr = true, is_json = true });
             }
 
             if (rgJsonUnit.IsMatch(sjson) && max == n)
@@ -647,7 +651,7 @@ namespace System.DJ.DJson
                 resetStrJsonVal(ref Value);
                 vObj = convertTo(Value1, Value);
 
-                vObj = new { key = Key, value = vObj, is_arr = false };
+                vObj = new { key = Key, value = vObj, is_arr = false, is_json = false };
                 results.Add(vObj);
                 dictionaryAddItem(vObj);
             }
