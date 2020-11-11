@@ -24,7 +24,6 @@ C:\Users\admin\Documents\ImplementFactory\System.DJ.ImplementFactory\System.DJ.D
 E:\Projects\ImplementFactory\System.DJ.ImplementFactory\System.DJ.DJson\obj\Debug\System.DJ.DJson.csproj.CoreCompileInputs.cache
 E:\Projects\Github\Daijiu77\System.DJ.DJson\bin\Debug\System.DJ.DJson.dll
 E:\Projects\Github\Daijiu77\System.DJ.DJson\bin\Debug\System.DJ.DJson.pdb
-E:\Projects\Github\Daijiu77\System.DJ.DJson\obj\Debug\System.DJ.DJson.csprojAssemblyReference.cache
 E:\Projects\Github\Daijiu77\System.DJ.DJson\obj\Debug\System.DJ.DJson.csproj.CoreCompileInputs.cache
 E:\Projects\Github\Daijiu77\System.DJ.DJson\obj\Debug\System.DJ.DJson.dll
 E:\Projects\Github\Daijiu77\System.DJ.DJson\obj\Debug\System.DJ.DJson.pdb

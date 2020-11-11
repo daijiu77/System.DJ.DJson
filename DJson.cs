@@ -461,6 +461,8 @@ namespace System.DJ.DJson
                     }
                     else
                     {
+                        Dictionary<string, CKeyValue> dictionary = new Dictionary<string, CKeyValue>();
+                        v = replaceAll(v, dictionary);
                         current.isJsonOfValue = JsonRegex.rgJsonUnit.IsMatch(v);
                         current.isJsonOfValue = false == current.isJsonOfValue ? JsonRegex.rgBaseTypeArr.IsMatch(v) : current.isJsonOfValue;
                         current.isJsonOfValue = false == current.isJsonOfValue ? JsonRegex.rgMixedArr.IsMatch(v) : current.isJsonOfValue;
