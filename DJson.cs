@@ -399,7 +399,7 @@ namespace System.DJ.DJson
                 string isArr = type.GetProperty("is_arr").GetValue(kvObj, null).ToString();
                 is_arr = Convert.ToBoolean(isArr);
 
-                string isJson= type.GetProperty("is_json").GetValue(kvObj, null).ToString();
+                string isJson = type.GetProperty("is_json").GetValue(kvObj, null).ToString();
                 is_json = Convert.ToBoolean(isJson);
             }
 
@@ -471,15 +471,6 @@ namespace System.DJ.DJson
                         current.isJsonOfValue = false == current.isJsonOfValue ? JsonRegex.rgMixedArr.IsMatch(v) : current.isJsonOfValue;
                         current.isJsonOfValue = false == current.isJsonOfValue ? kv.is_json : current.isJsonOfValue;
                     }
-                    object v1 = convertValue(current);
-                    if (null != v1)
-                    {
-                        v = v1.ToString();
-                        resetStrJsonVal(ref v);
-                        v1 = v;
-                    }
-
-                    current.value = v1;
                 }
             }
 

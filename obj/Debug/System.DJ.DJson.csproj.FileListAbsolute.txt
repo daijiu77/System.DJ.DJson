@@ -33,3 +33,4 @@ C:\Users\admin\Documents\System.DJ.DJson\obj\Debug\System.DJ.DJson.csprojAssembl
 C:\Users\admin\Documents\System.DJ.DJson\obj\Debug\System.DJ.DJson.csproj.CoreCompileInputs.cache
 C:\Users\admin\Documents\System.DJ.DJson\obj\Debug\System.DJ.DJson.dll
 C:\Users\admin\Documents\System.DJ.DJson\obj\Debug\System.DJ.DJson.pdb
+E:\Projects\Github\Daijiu77\System.DJ.DJson\obj\Debug\System.DJ.DJson.csprojAssemblyReference.cache
