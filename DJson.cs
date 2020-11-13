@@ -455,6 +455,7 @@ namespace System.DJ.DJson
             current.key = string.IsNullOrEmpty(kv.key) ? null : kv.key;
             current.value = kv.value;
             current.isArrayItemOfValue = kv.is_arr;
+            current.isJsonOfValue = kv.is_json;
             if (null != current.value)
             {
                 if (typeof(string) == current.value.GetType())
@@ -463,13 +464,6 @@ namespace System.DJ.DJson
                     if (v.Equals("|null|"))
                     {
                         current.value = null;
-                    }
-                    else
-                    {
-                        current.isJsonOfValue = JsonRegex.rgJsonUnit.IsMatch(v);
-                        current.isJsonOfValue = false == current.isJsonOfValue ? JsonRegex.rgBaseTypeArr.IsMatch(v) : current.isJsonOfValue;
-                        current.isJsonOfValue = false == current.isJsonOfValue ? JsonRegex.rgMixedArr.IsMatch(v) : current.isJsonOfValue;
-                        current.isJsonOfValue = false == current.isJsonOfValue ? kv.is_json : current.isJsonOfValue;
                     }
                 }
             }
@@ -544,7 +538,7 @@ namespace System.DJ.DJson
             //json = json.Replace(rcArr[0].oldStr, rcArr[0].newStr);
             string sjson = replaceAll(json, dictionary);
 
-            matchBigBracket.check(sjson);
+            //matchBigBracket.check(sjson);
 
             string JsonUnit = "";
             int n = 0;
@@ -619,6 +613,9 @@ namespace System.DJ.DJson
 
             object vObj = null;
 
+            bool isJson = false;
+            bool isArr = false;
+
             Match m = null;
             while (rgKV.IsMatch(sjson) && max > n)
             {
@@ -637,12 +634,19 @@ namespace System.DJ.DJson
                 sign = Key2 + SplitStr + Value2;
                 sjson = sjson.Replace(sign, "");
 
+                isJson = false;
+                isArr = false;
+                if (!string.IsNullOrEmpty(Value))
+                {
+                    isJson = JsonRegex.rgReplaceSign.IsMatch(Value);
+                }
+
                 restReplace(dictionary, ref Value);
 
                 resetStrJsonVal(ref Value);
                 vObj = convertTo(Value1, Value);
 
-                vObj = new { key = Key, value = vObj, is_arr = false, is_json = false };
+                vObj = new { key = Key, value = vObj, is_arr = isArr, is_json = isJson };
                 results.Add(vObj);
                 dictionaryAddItem(vObj);
             }

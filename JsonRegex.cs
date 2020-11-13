@@ -79,7 +79,7 @@ namespace System.DJ.DJson
             string s = "";
 
             //匹配值为json单元对象的键值对 key : {key1:value1,key2:value2,key3:value3}
-            s = @"(((?<FieldName1>"")(?<FieldName>[a-z0-9_]+)"")|(?<FieldName>[a-z0-9_]+))(?<SplitStr>\s*\:\s*)(?<FieldValue>((\{(\,?[\s\r\n]*((""[a-z0-9_]+""[\s\r\n]*\:[\s\r\n]*""[^""]*"")|(""[a-z0-9_]+""[\s\r\n]*\:[\s\r\n]*([a-z0-9_\.\-]+)))[\s\r\n]*\,?)+\})|(\[(\,?[\s\r\n]*\{(\,?[\s\r\n]*((""[a-z0-9_]+""[\s\r\n]*\:[\s\r\n]*""[^""]*"")|(""[a-z0-9_]+""[\s\r\n]*\:[\s\r\n]*([a-z0-9_\.\-]+)))[\s\r\n]*\,?)+\}[\s\r\n]*\,?)+\])))";
+            s = @"(((?<FieldName1>"")(?<FieldName>[a-z0-9_]+)"")|(?<FieldName>[a-z0-9_]+))(?<SplitStr>\s*\:\s*)(?<FieldValue>\{(\,?[\s\r\n]*((""[a-z0-9_]+""[\s\r\n]*\:[\s\r\n]*""[^""]*"")|(""[a-z0-9_]+""[\s\r\n]*\:[\s\r\n]*([a-z0-9_\.\-]+)))[\s\r\n]*\,?)+\})";
             rgKV_ValOfJsonUnit = new Regex(s, RegexOptions.IgnoreCase);
 
             //匹配值为数组(数据实体为元素)的键值对 key : [{key1:value1,key2:value2,key3:value3},{key1:value1,key2:value2,key3:value3},{key1:value1,key2:value2,key3:value3}]
@@ -102,7 +102,7 @@ namespace System.DJ.DJson
             rgBaseTypeArr = new Regex(s, RegexOptions.IgnoreCase);
 
             //匹配json单元 {key1:value1,key2:value2,key3:value3}
-            s = @"((?<JsonUnit>\{((?!\}\s*\,\s*\{)(.|(\r\n)))+\})[\s\r\n]*\,[\s\r\n]*\{)|((?<JsonUnit>\{(.|(\r\n))+\})[\s\r\n]*\]$)|(?<JsonUnit>^\{(\,?[\s\r\n]*((""[a-z0-9_]+""[\s\r\n]*\:[\s\r\n]*""[^""]*"")|(""[a-z0-9_]+""[\s\r\n]*\:[\s\r\n]*((true)|(false)|(null)|([0-9\.\-]+))))[\s\r\n]*\,?)+\}$)";
+            s = @"(?<JsonUnit>\{(\,?[\s\r\n]*""[a-z0-9_]+""[\s\r\n]*\:[\s\r\n]*((""[^""]*"")|([a-z0-9_\.\-]+))[\s\r\n]*\,?)+\})";
             rgJsonUnit = new Regex(s, RegexOptions.IgnoreCase);
 
             //匹配json单元, 错误检查 -单元与单元之间缺少逗号,}{之间缺少逗号- {key1:value1,key2:value2,key3:value3}{key1:value1,key2:value2,key3:value3}
